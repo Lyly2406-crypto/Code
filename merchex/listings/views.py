@@ -1,8 +1,13 @@
-from django.shortcuts import render # type: ignore
-from django.http import HttpResponse # type: ignore
+from django.shortcuts import render 
+from django.http import HttpResponse
+from .models import Band
+
 
 def hello(request):
-    return HttpResponse('<h1> Hello Django! </h1>')
 
+    bands = Band.objects.all()
+
+    return render( request, 'listings/hello.html', 
+                  context={'bands': bands})
 def about(request):
     return HttpResponse('<h1> A propos</h1> <p> Nous adorons merch !</p>')

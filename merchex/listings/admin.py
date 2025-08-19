@@ -1,9 +1,15 @@
-from django.contrib import admin # type: ignore
-from listings.models import Band
+from django.contrib import admin
+from .models import Band, Listing
 
+
+@admin.register(Band)
 class BandAdmin(admin.ModelAdmin):
-    list_display =('name', 'year_formed', 'genre')
+    list_display = ("name", "genre", "year_formed", "active")  
+    list_filter = ("genre", "active")  
+    search_fields = ("name", "biography")  
 
-admin.site.register(Band,BandAdmin)
 
-# Register your models here.
+@admin.register(Listing)
+class ListingAdmin(admin.ModelAdmin):
+    list_display = ("genre",)  
+    list_filter = ("genre",)

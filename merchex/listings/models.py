@@ -1,15 +1,5 @@
-from django.db import models 
-
+from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-
-class Band(models.Model):
-    name = models.fields.CharField(max_length=100)
-    genre = models.fields.CharField()
-    biography = models.fields.CharField()
-    year_formed = models.fields.IntegerField()
-    validators=[MinValueValidator(1900), MaxValueValidator(2021)]
-    active = models.fields.BooleanField(default=True)
-    official_homepage = models.fields.URLField(null=True, blank=True)
 
 
 GENRE_CHOICES = [
@@ -18,17 +8,26 @@ GENRE_CHOICES = [
     ('POP', 'Pop'),
 ]
 
+
+class Band(models.Model):
+    name = models.CharField(max_length=100)
+    genre = models.CharField(max_length=100, default="Unknown")
+    biography = models.TextField(blank=True, default="")
+    year_formed = models.IntegerField(
+        validators=[MinValueValidator(1900), MaxValueValidator(2021)]
+    )
+    active = models.BooleanField(default=True)
+    official_homepage = models.URLField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Listing(models.Model):
     genre = models.CharField(
         choices=GENRE_CHOICES,
         max_length=5,
     )
 
-
-
-
-
-
-    
-def __str__(self):
-    return f"{self.name}"
+    def __str__(self):
+        return f"Listing: {self.genre}"
