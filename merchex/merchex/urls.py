@@ -19,7 +19,11 @@ from django.urls import path
 from listings import views
 
 urlpatterns = [
+    path('home', views.home, name='home'),
     path('admin/', admin.site.urls),
-    path('hello/', views.hello),
-    path('about-us/', views.about), 
+    path('bands/', views.band_list, name='band_list'),
+    path('bands/<int:band_id>/', views.band_detail, name='band-detail'),
+    path('bands/add/', views.band_create, name='band-create'),
+    path('about/', views.about, name='about'), 
+    path('contact/', views.contact, name='contact'),
 ]
