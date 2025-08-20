@@ -26,4 +26,5 @@ urlpatterns = [
     path('bands/add/', views.band_create, name='band-create'),
     path('about/', views.about, name='about'), 
     path('contact/', views.contact, name='contact'),
+    path('bands/<int:id>/update/', views.band_update, name='band-update'),
 ]
