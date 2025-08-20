@@ -8,6 +8,16 @@ from django.shortcuts import redirect
 from .forms import BandForm
 
 
+def band_delete(request, id):
+    band = Band.objects.get(id=id)
+    if request.method == 'POST':
+        band.delete()
+        return redirect('band_list')
+    return render(request,
+                    'listings/band_delete.html',
+                    {'band': band})
+
+
 def band_update(request, id):
     band = Band.objects.get(id=id)
 
